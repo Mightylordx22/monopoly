@@ -733,10 +733,10 @@
             // numberBox
             // 
             this.numberBox.AutoSize = true;
-            this.numberBox.Font = new System.Drawing.Font("Minecrafter", 99.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 99.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numberBox.Location = new System.Drawing.Point(1340, 829);
             this.numberBox.Name = "numberBox";
-            this.numberBox.Size = new System.Drawing.Size(0, 116);
+            this.numberBox.Size = new System.Drawing.Size(0, 152);
             this.numberBox.TabIndex = 58;
             // 
             // diceOne
@@ -810,7 +810,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1684, 961);
+            this.ClientSize = new System.Drawing.Size(1604, 881);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);

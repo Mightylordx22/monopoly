@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Monopoly2
 {
     public partial class Form1 : Form
     {
-        Dictionary<int, string> players = new Dictionary<int, string>() { {1,"playerSteve"},{2,"playerAlex" },{3,"playerWither" },{4,"playerED" } };
+        Dictionary<int, string> players = new Dictionary<int, string>() { { 1, "playerSteve" }, { 2, "playerAlex" }, { 3, "playerWither" }, { 4, "playerED" } };
         int currentPlayer = 1;
         int stevePos = 0;
         int alexPos = 0;
         int witherPos = 0;
         int edPos = 0;
         string[] boxes = { "pictureBox1", "pictureBox2", "pictureBox3", "pictureBox4", "pictureBox5", "pictureBox6", "pictureBox7", "pictureBox8", "pictureBox9", "pictureBox10", "pictureBox11", "pictureBox12", "pictureBox13", "pictureBox14", "pictureBox15", "pictureBox16", "pictureBox17", "pictureBox18", "pictureBox19", "pictureBox20", "pictureBox21", "pictureBox22", "pictureBox23", "pictureBox24", "pictureBox25", "pictureBox26", "pictureBox27", "pictureBox28", "pictureBox29", "pictureBox30", "pictureBox31", "pictureBox32", "pictureBox33", "pictureBox34", "pictureBox35", "pictureBox36", "pictureBox37", "pictureBox38", "pictureBox39", "pictureBox40" };
-        Dictionary<string, string> boxNames = new Dictionary<string, string> { };
+        Dictionary<string, string> boxNames = new Dictionary<string, string> { { "pictureBox1", "Go" }, { "pictureBox2", "Dirt Road" }, { "pictureBox3", "Ender Chest" }, { "pictureBox4", "Church Road" }, { "pictureBox5", "Golem Tax" }, { "pictureBox6", "Mesa Station" }, { "pictureBox7", "Quartz Path" }, { "pictureBox8", "Chance" }, { "pictureBox9", "Quartz Temple" }, { "pictureBox10", "Quartz Statue" }, { "pictureBox11", "Jail" }, { "pictureBox12", "Nether Arc" }, { "pictureBox13", "Redsdtone Tower" }, { "pictureBox14", "Nether Mall" }, { "pictureBox15", "Nether Avenue" }, { "pictureBox16", "Jungle Station" }, { "pictureBox17", "Bean Street" }, { "pictureBox18", "Ender Chest" }, { "pictureBox19", "Cookie Street" }, { "pictureBox20", "Vine Road" }, { "pictureBox21", "Free Parking" }, { "pictureBox22", "Clay Street" }, { "pictureBox23", "Chance" }, { "pictureBox24", "Shrub Street" }, { "pictureBox25", "Stick Avenue" }, { "pictureBox26", "Plains Station" }, { "pictureBox27", "Gold Square" }, { "pictureBox28", "Sand Street" }, { "pictureBox29", "Qater Pipe" }, { "pictureBox30", "Glass Tower" }, { "pictureBox31", "Go To Jail" }, { "pictureBox32", "Grass Road" }, { "pictureBox33", "Sunflower Street" }, { "pictureBox34", "Ender Chest" }, { "pictureBox35", "Rose Road" }, { "pictureBox36", "Mesa Station" }, { "pictureBox37", "Chance" }, { "pictureBox38", "Beacon Tower" }, { "pictureBox39", "Dragon Tax" }, { "pictureBox40", "Diamond City" } };
 
         public Form1()
         {
             InitializeComponent();
-            label9.Text = "Go";
-            label10.Text = "Go";
-            label11.Text = "Go";
-            label12.Text = "Go";
+            label9.Text = boxNames[boxes[stevePos]];
+            label10.Text = boxNames[boxes[alexPos]];
+            label11.Text = boxNames[boxes[witherPos]];
+            label12.Text = boxNames[boxes[edPos]];
         }
 
         private int throwDice()
@@ -80,7 +75,7 @@ namespace Monopoly2
             }
 
 
-            return one+two;
+            return one + two;
         }
         private void pictureBox5_Click(object sender, EventArgs e)
         {
@@ -104,9 +99,9 @@ namespace Monopoly2
 
             if (currentPlayer == 1)
             {
-                
+
                 stevePos += move;
-                label9.Text = boxes[stevePos];
+                label9.Text = boxNames[boxes[stevePos]];
                 if (stevePos >= 40)
                 {
                     stevePos -= 40;
@@ -246,7 +241,7 @@ namespace Monopoly2
                     playerSteve.Top = pictureBox27.Top + 5;
                     playerSteve.Left = pictureBox27.Left + 5;
                 }
-                if (stevePos ==27)
+                if (stevePos == 27)
                 {
                     playerSteve.Top = pictureBox28.Top + 5;
                     playerSteve.Left = pictureBox28.Left + 5;
@@ -286,7 +281,7 @@ namespace Monopoly2
                     playerSteve.Top = pictureBox35.Top + 5;
                     playerSteve.Left = pictureBox35.Left + 5;
                 }
-                if (stevePos ==35)
+                if (stevePos == 35)
                 {
                     playerSteve.Top = pictureBox36.Top + 5;
                     playerSteve.Left = pictureBox36.Left + 5;
@@ -311,13 +306,13 @@ namespace Monopoly2
                     playerSteve.Top = pictureBox40.Top + 5;
                     playerSteve.Left = pictureBox40.Left + 5;
                 }
-                
+
             }
             if (currentPlayer == 2)
             {
-                
+
                 alexPos += move;
-                label10.Text = boxes[alexPos];
+                label10.Text = boxNames[boxes[alexPos]];
                 if (alexPos >= 40)
                 {
                     alexPos -= 40;
@@ -526,9 +521,9 @@ namespace Monopoly2
             }
             if (currentPlayer == 3)
             {
-                
+
                 witherPos += move;
-                label11.Text = boxes[witherPos];
+                label11.Text = boxNames[boxes[witherPos]];
                 if (witherPos >= 40)
                 {
                     witherPos -= 40;
@@ -738,7 +733,7 @@ namespace Monopoly2
             if (currentPlayer == 4)
             {
                 edPos += move;
-                label12.Text = boxes[edPos];
+                label12.Text = boxNames[boxes[edPos]];
                 if (edPos >= 40)
                 {
                     edPos -= 40;
