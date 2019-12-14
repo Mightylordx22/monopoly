@@ -16,7 +16,8 @@ namespace Monopoly2
         string[] boxes = { "pictureBox1", "pictureBox2", "pictureBox3", "pictureBox4", "pictureBox5", "pictureBox6", "pictureBox7", "pictureBox8", "pictureBox9", "pictureBox10", "pictureBox11", "pictureBox12", "pictureBox13", "pictureBox14", "pictureBox15", "pictureBox16", "pictureBox17", "pictureBox18", "pictureBox19", "pictureBox20", "pictureBox21", "pictureBox22", "pictureBox23", "pictureBox24", "pictureBox25", "pictureBox26", "pictureBox27", "pictureBox28", "pictureBox29", "pictureBox30", "pictureBox31", "pictureBox32", "pictureBox33", "pictureBox34", "pictureBox35", "pictureBox36", "pictureBox37", "pictureBox38", "pictureBox39", "pictureBox40" };
         Dictionary<string, string> boxNames = new Dictionary<string, string> { { "pictureBox1", "Go" }, { "pictureBox2", "Dirt Road" }, { "pictureBox3", "Ender Chest" }, { "pictureBox4", "Church Road" }, { "pictureBox5", "Golem Tax" }, { "pictureBox6", "Mesa Station" }, { "pictureBox7", "Quartz Path" }, { "pictureBox8", "Chance" }, { "pictureBox9", "Quartz Temple" }, { "pictureBox10", "Quartz Statue" }, { "pictureBox11", "Jail" }, { "pictureBox12", "Nether Arc" }, { "pictureBox13", "Redsdtone Tower" }, { "pictureBox14", "Nether Mall" }, { "pictureBox15", "Nether Avenue" }, { "pictureBox16", "Jungle Station" }, { "pictureBox17", "Bean Street" }, { "pictureBox18", "Ender Chest" }, { "pictureBox19", "Cookie Street" }, { "pictureBox20", "Vine Road" }, { "pictureBox21", "Free Parking" }, { "pictureBox22", "Clay Street" }, { "pictureBox23", "Chance" }, { "pictureBox24", "Shrub Street" }, { "pictureBox25", "Stick Avenue" }, { "pictureBox26", "Plains Station" }, { "pictureBox27", "Gold Square" }, { "pictureBox28", "Sand Street" }, { "pictureBox29", "Water Pipe" }, { "pictureBox30", "Glass Tower" }, { "pictureBox31", "Go To Jail" }, { "pictureBox32", "Grass Road" }, { "pictureBox33", "Sunflower Street" }, { "pictureBox34", "Ender Chest" }, { "pictureBox35", "Rose Road" }, { "pictureBox36", "Swamp Station" }, { "pictureBox37", "Chance" }, { "pictureBox38", "Beacon Tower" }, { "pictureBox39", "Dragon Tax" }, { "pictureBox40", "Diamond City" } };
         Dictionary<int, int> playermOney = new Dictionary<int, int>() { { 1, 1500 }, { 2, 1500 }, { 3, 1500 }, { 4, 1500 } };
-        Dictionary<string, bool> ownedPlaces = new Dictionary<string, bool>() { { "Dirt Road", false }, { "Church Road", false }, { "Mesa Station", false }, { "Quartz Path", false }, { "Quartz Temple", false }, { "Quartz Statue", false }, { "Nether Arc", false }, { "Redsdtone Tower", false }, { "Nether Mall", false }, { "Nether Avenue", false }, { "Jungle Station", false }, { "Bean Street", false }, { "Cookie Street", false }, { "Vine Road", false }, { "Clay Street", false }, { "Shrub Street", false }, { "Stick Avenue", false }, { "Plains Station", false }, { "Gold Square", false }, { "Sand Street", false }, { "Water Pipe", false }, { "Glass Tower", false }, { "Grass Road", false } , { "Sunflower Street", false }, { "Rose Road", false }, { "Swamp Station", false },  { "Beacon Tower", false }, { "Diamond City", false } };
+        Dictionary<string, int> ownedPlaces = new Dictionary<string, int>() { { "Dirt Road", 0 }, { "Church Road", 0 }, { "Mesa Station", 0 }, { "Quartz Path", 0 }, { "Quartz Temple", 0 }, { "Quartz Statue", 0 }, { "Nether Arc", 0 }, { "Redsdtone Tower", 0 }, { "Nether Mall", 0 }, { "Nether Avenue", 0 }, { "Jungle Station", 0 }, { "Bean Street", 0 }, { "Cookie Street", 0 }, { "Vine Road", 0 }, { "Clay Street", 0 }, { "Shrub Street", 0 }, { "Stick Avenue", 0 }, { "Plains Station", 0 }, { "Gold Square", 0 }, { "Sand Street", 0 }, { "Water Pipe", 0 }, { "Glass Tower", 0 }, { "Grass Road", 0 } , { "Sunflower Street", 0 }, { "Rose Road", 0 }, { "Swamp Station", 0 },  { "Beacon Tower", 0 }, { "Diamond City", 0 } };
+        Dictionary<string,int> pricePlaces = new Dictionary<string, int>() { { "Dirt Road", 60 }, { "Church Road", 60 }, { "Mesa Station", 200 }, { "Quartz Path", 100 }, { "Quartz Temple", 100 }, { "Quartz Statue", 120 }, { "Nether Arc", 140 }, { "Redsdtone Tower", 150 }, { "Nether Mall", 140 }, { "Nether Avenue", 160 }, { "Jungle Station", 200 }, { "Bean Street", 180 }, { "Cookie Street", 180 }, { "Vine Road", 200 }, { "Clay Street", 220 }, { "Shrub Street", 220 }, { "Stick Avenue", 240 }, { "Plains Station", 200 }, { "Gold Square", 260 }, { "Sand Street", 260 }, { "Water Pipe", 150 }, { "Glass Tower", 280 }, { "Grass Road", 300 }, { "Sunflower Street", 300 }, { "Rose Road", 320 }, { "Swamp Station", 200 }, { "Beacon Tower", 350 }, { "Diamond City", 400 } };
         public Form1()
         {
             InitializeComponent();
@@ -103,18 +104,18 @@ namespace Monopoly2
             {
 
                 stevePos += move;
-                int steveMoney = Int32.Parse(steveMoneyLabel.Text);
-
+                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1,steveMoneyLabel.Text.Length-1));
                 if (stevePos >= 40)
                 {
                     stevePos -= 40;
+                    steveMoney += 200;
                 }
                 label9.Text = boxNames[boxes[stevePos]];
                 if (stevePos == 0)
                 {
                     playerSteve.Top = pictureBox1.Top + 5;
                     playerSteve.Left = pictureBox1.Left + 5;
-                    steveMoney += 200;
+                    
                 }
                 if (stevePos == 1)
                 {
@@ -311,24 +312,26 @@ namespace Monopoly2
                     playerSteve.Top = pictureBox40.Top + 5;
                     playerSteve.Left = pictureBox40.Left + 5;
                 }
-                steveMoneyLabel.Text = steveMoney.ToString();
+                steveMoneyLabel.Text = "$"+steveMoney.ToString();
+                randomButton.Enabled = false;
             }
             if (currentPlayer == 2)
             {
 
                 alexPos += move;
-                int alexMoney = Int32.Parse(alexMoneyLabel.Text);
-                
+                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1));
+
                 if (alexPos >= 40)
                 {
                     alexPos -= 40;
+                    alexMoney += 200;
                 }
                 label10.Text = boxNames[boxes[alexPos]];
                 if (alexPos == 0)
                 {
                     playerAlex.Top = pictureBox1.Top + 5;
                     playerAlex.Left = pictureBox1.Right - 35;
-                    alexMoney += 200;
+                    
                 }
                 if (alexPos == 1)
                 {
@@ -525,24 +528,26 @@ namespace Monopoly2
                     playerAlex.Top = pictureBox40.Top + 5;
                     playerAlex.Left = pictureBox40.Right - 35;
                 }
-                alexMoneyLabel.Text = alexMoney.ToString();
+                alexMoneyLabel.Text = "$"+alexMoney.ToString();
+                randomButton.Enabled = false;
             }
             if (currentPlayer == 3)
             {
 
                 witherPos += move;
-                int witherMoney = Int32.Parse(witherMoneyLabel.Text);
-                
+                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1));
+
                 if (witherPos >= 40)
                 {
                     witherPos -= 40;
+                    witherMoney += 200;
                 }
                 label11.Text = boxNames[boxes[witherPos]];
                 if (witherPos == 0)
                 {
                     playerWither.Top = pictureBox1.Top + 45;
                     playerWither.Left = pictureBox1.Left + 5;
-                    witherMoney += 200;
+                    
                 }
                 if (witherPos == 1)
                 {
@@ -739,16 +744,18 @@ namespace Monopoly2
                     playerWither.Top = pictureBox40.Top + 45;
                     playerWither.Left = pictureBox40.Left + 5;
                 }
-                witherMoneyLabel.Text = witherMoney.ToString();
+                witherMoneyLabel.Text = "$"+witherMoney.ToString();
+                randomButton.Enabled = false;
             }
             if (currentPlayer == 4)
             {
                 edPos += move;
-                int edMoney = Int32.Parse(edMoneyLabel.Text);
+                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1));
 
                 if (edPos >= 40)
                 {
                     edPos -= 40;
+                    edMoney += 200;
                 }
                 label12.Text = boxNames[boxes[edPos]];
 
@@ -756,7 +763,7 @@ namespace Monopoly2
                 {
                     playerED.Top = pictureBox1.Top + 45;
                     playerED.Left = pictureBox1.Right - 35;
-                    edMoney += 200;
+                    
                 }
                 if (edPos == 1)
                 {
@@ -953,20 +960,116 @@ namespace Monopoly2
                     playerED.Top = pictureBox40.Top + 45;
                     playerED.Left = pictureBox40.Right - 35;
                 }
-                edMoneyLabel.Text = edMoney.ToString();
+                edMoneyLabel.Text = "$"+edMoney.ToString();
+                randomButton.Enabled = false;
             }
-            currentPlayer++;
-            if (currentPlayer == 5)
-            {
-                currentPlayer = 1;
-            }
-            currentPlayerBox.Text = players[currentPlayer] + "'s turn";
+            
 
         }
 
         private void player_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (currentPlayer == 1)
+            {
+                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1));
+                string currentSquare = boxNames[boxes[stevePos]];
+                if (ownedPlaces.ContainsKey(currentSquare) && (steveMoney > pricePlaces[currentSquare]) && (ownedPlaces[currentSquare] == 0))
+                {
+                    ownedPlaces[currentSquare] = currentPlayer;
+                    MessageBox.Show(players[currentPlayer] + " bought " + currentSquare);
+                    steveMoney -= pricePlaces[currentSquare];
+                    steveMoneyLabel.Text = "$" + steveMoney.ToString();
+                    buyButton.Enabled = false;
+                } else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0)
+                {
+                    MessageBox.Show("You can't buy " + currentSquare+" because "+players[ownedPlaces[currentSquare]]+" owns it!");
+                }
+                else
+                {
+                    MessageBox.Show("You can't buy " + currentSquare);
+                }
+            }
+            if (currentPlayer == 2)
+            {
+                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1));
+                string currentSquare = boxNames[boxes[alexPos]];
+                if (ownedPlaces.ContainsKey(currentSquare) && (alexMoney > pricePlaces[currentSquare]) && (ownedPlaces[currentSquare] == 0))
+                {
+                    ownedPlaces[currentSquare] = currentPlayer;
+                    MessageBox.Show(players[currentPlayer] + " bought " + currentSquare);
+                    alexMoney -= pricePlaces[currentSquare];
+                    alexMoneyLabel.Text = "$" + alexMoney.ToString();
+                    buyButton.Enabled = false;
+                }
+                else if (ownedPlaces.ContainsKey(currentSquare) &&  ownedPlaces[currentSquare] != 0)
+                {
+                    MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
+                }
+                else
+                {
+                    MessageBox.Show("You can't buy " + currentSquare);
+                }
+            }
+            if (currentPlayer == 3)
+            {
+                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1));
+                string currentSquare = boxNames[boxes[witherPos]];
+                if (ownedPlaces.ContainsKey(currentSquare) && (witherMoney > pricePlaces[currentSquare]) && (ownedPlaces[currentSquare] == 0))
+                {
+                    ownedPlaces[currentSquare] = currentPlayer;
+                    MessageBox.Show(players[currentPlayer] + " bought " + currentSquare);
+                    witherMoney -= pricePlaces[currentSquare];
+                    witherMoneyLabel.Text = "$" + witherMoney.ToString();
+                    buyButton.Enabled = false;
+                }
+                else if (ownedPlaces.ContainsKey(currentSquare) &&  ownedPlaces[currentSquare] != 0)
+                {
+                    MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
+                }
+                else
+                {
+                    MessageBox.Show("You can't buy " + currentSquare);
+                }
+            }
+            if (currentPlayer == 4)
+            {
+                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1));
+                string currentSquare = boxNames[boxes[witherPos]];
+                if (ownedPlaces.ContainsKey(currentSquare) && (edMoney > pricePlaces[currentSquare]) && (ownedPlaces[currentSquare] == 0))
+                {
+                    ownedPlaces[currentSquare] = currentPlayer;
+                    MessageBox.Show(players[currentPlayer] + " bought " + currentSquare);
+                    edMoney -= pricePlaces[currentSquare];
+                    edMoneyLabel.Text = "$" + edMoney.ToString();
+                    buyButton.Enabled = false;
+                }
+                else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0)
+                {
+                    MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
+                }
+                else
+                {
+                    MessageBox.Show("You can't buy " + currentSquare);
+                }
+            }
+        }
+
+        private void finishTurn_Click(object sender, EventArgs e)
+        {
+            currentPlayer++;
+            if (currentPlayer == 5)
+            {
+                currentPlayer = 1;
+            }
+            currentPlayerBox.Text = players[currentPlayer] + "'s turn";
+            randomButton.Enabled = true;
+            buyButton.Enabled = true;
+            boughtLabel.Text = "";
         }
     }
 }

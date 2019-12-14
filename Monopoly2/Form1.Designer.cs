@@ -95,6 +95,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.buyButton = new System.Windows.Forms.Button();
+            this.finishTurn = new System.Windows.Forms.Button();
+            this.boughtLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -805,12 +808,43 @@
             this.label12.TabIndex = 65;
             this.label12.Text = "label12";
             // 
+            // buyButton
+            // 
+            this.buyButton.Location = new System.Drawing.Point(1044, 513);
+            this.buyButton.Name = "buyButton";
+            this.buyButton.Size = new System.Drawing.Size(86, 57);
+            this.buyButton.TabIndex = 66;
+            this.buyButton.Text = "Click me to buy current Square";
+            this.buyButton.UseVisualStyleBackColor = true;
+            this.buyButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // finishTurn
+            // 
+            this.finishTurn.Location = new System.Drawing.Point(1044, 619);
+            this.finishTurn.Name = "finishTurn";
+            this.finishTurn.Size = new System.Drawing.Size(86, 57);
+            this.finishTurn.TabIndex = 68;
+            this.finishTurn.Text = "End Turn";
+            this.finishTurn.UseVisualStyleBackColor = true;
+            this.finishTurn.Click += new System.EventHandler(this.finishTurn_Click);
+            // 
+            // boughtLabel
+            // 
+            this.boughtLabel.AutoSize = true;
+            this.boughtLabel.Location = new System.Drawing.Point(1143, 530);
+            this.boughtLabel.Name = "boughtLabel";
+            this.boughtLabel.Size = new System.Drawing.Size(0, 13);
+            this.boughtLabel.TabIndex = 69;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1604, 881);
+            this.ClientSize = new System.Drawing.Size(1529, 877);
+            this.Controls.Add(this.boughtLabel);
+            this.Controls.Add(this.finishTurn);
+            this.Controls.Add(this.buyButton);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -1004,6 +1038,9 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button buyButton;
+        private System.Windows.Forms.Button finishTurn;
+        private System.Windows.Forms.Label boughtLabel;
     }
 }
 
