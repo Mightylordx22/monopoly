@@ -78,10 +78,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.steveMoneyLabel = new System.Windows.Forms.Label();
+            this.alexMoneyLabel = new System.Windows.Forms.Label();
+            this.witherMoneyLabel = new System.Windows.Forms.Label();
+            this.edMoneyLabel = new System.Windows.Forms.Label();
             this.pictureBox46 = new System.Windows.Forms.PictureBox();
             this.pictureBox47 = new System.Windows.Forms.PictureBox();
             this.pictureBox48 = new System.Windows.Forms.PictureBox();
@@ -640,41 +640,41 @@
             this.label4.TabIndex = 48;
             this.label4.Text = "Ender Dragon";
             // 
-            // label5
+            // steveMoneyLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(995, 234);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 49;
-            this.label5.Text = "$1500";
+            this.steveMoneyLabel.AutoSize = true;
+            this.steveMoneyLabel.Location = new System.Drawing.Point(995, 234);
+            this.steveMoneyLabel.Name = "steveMoneyLabel";
+            this.steveMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.steveMoneyLabel.TabIndex = 49;
+            this.steveMoneyLabel.Text = "$1500";
             // 
-            // label6
+            // alexMoneyLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1143, 234);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 13);
-            this.label6.TabIndex = 50;
-            this.label6.Text = "$1500";
+            this.alexMoneyLabel.AutoSize = true;
+            this.alexMoneyLabel.Location = new System.Drawing.Point(1143, 234);
+            this.alexMoneyLabel.Name = "alexMoneyLabel";
+            this.alexMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.alexMoneyLabel.TabIndex = 50;
+            this.alexMoneyLabel.Text = "$1500";
             // 
-            // label7
+            // witherMoneyLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1294, 234);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 13);
-            this.label7.TabIndex = 51;
-            this.label7.Text = "$1500";
+            this.witherMoneyLabel.AutoSize = true;
+            this.witherMoneyLabel.Location = new System.Drawing.Point(1294, 234);
+            this.witherMoneyLabel.Name = "witherMoneyLabel";
+            this.witherMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.witherMoneyLabel.TabIndex = 51;
+            this.witherMoneyLabel.Text = "$1500";
             // 
-            // label8
+            // edMoneyLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1458, 234);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 13);
-            this.label8.TabIndex = 52;
-            this.label8.Text = "$1500";
+            this.edMoneyLabel.AutoSize = true;
+            this.edMoneyLabel.Location = new System.Drawing.Point(1458, 234);
+            this.edMoneyLabel.Name = "edMoneyLabel";
+            this.edMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.edMoneyLabel.TabIndex = 52;
+            this.edMoneyLabel.Text = "$1500";
             // 
             // pictureBox46
             // 
@@ -824,10 +824,10 @@
             this.Controls.Add(this.pictureBox48);
             this.Controls.Add(this.pictureBox47);
             this.Controls.Add(this.pictureBox46);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.edMoneyLabel);
+            this.Controls.Add(this.witherMoneyLabel);
+            this.Controls.Add(this.alexMoneyLabel);
+            this.Controls.Add(this.steveMoneyLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -987,10 +987,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox playerSteve;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label steveMoneyLabel;
+        private System.Windows.Forms.Label alexMoneyLabel;
+        private System.Windows.Forms.Label witherMoneyLabel;
+        private System.Windows.Forms.Label edMoneyLabel;
         private System.Windows.Forms.PictureBox pictureBox46;
         private System.Windows.Forms.PictureBox pictureBox47;
         private System.Windows.Forms.PictureBox pictureBox48;
