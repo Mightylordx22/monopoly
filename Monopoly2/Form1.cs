@@ -15,7 +15,7 @@ namespace Monopoly2
         int edPos = 0;
         string[] boxes = { "pictureBox1", "pictureBox2", "pictureBox3", "pictureBox4", "pictureBox5", "pictureBox6", "pictureBox7", "pictureBox8", "pictureBox9", "pictureBox10", "pictureBox11", "pictureBox12", "pictureBox13", "pictureBox14", "pictureBox15", "pictureBox16", "pictureBox17", "pictureBox18", "pictureBox19", "pictureBox20", "pictureBox21", "pictureBox22", "pictureBox23", "pictureBox24", "pictureBox25", "pictureBox26", "pictureBox27", "pictureBox28", "pictureBox29", "pictureBox30", "pictureBox31", "pictureBox32", "pictureBox33", "pictureBox34", "pictureBox35", "pictureBox36", "pictureBox37", "pictureBox38", "pictureBox39", "pictureBox40" };
         Dictionary<string, string> boxNames = new Dictionary<string, string> { { "pictureBox1", "Go" }, { "pictureBox2", "Dirt Road" }, { "pictureBox3", "Ender Chest" }, { "pictureBox4", "Church Road" }, { "pictureBox5", "Golem Tax" }, { "pictureBox6", "Mesa Station" }, { "pictureBox7", "Quartz Path" }, { "pictureBox8", "Chance" }, { "pictureBox9", "Quartz Temple" }, { "pictureBox10", "Quartz Statue" }, { "pictureBox11", "Jail" }, { "pictureBox12", "Nether Arc" }, { "pictureBox13", "Redsdtone Tower" }, { "pictureBox14", "Nether Mall" }, { "pictureBox15", "Nether Avenue" }, { "pictureBox16", "Jungle Station" }, { "pictureBox17", "Bean Street" }, { "pictureBox18", "Ender Chest" }, { "pictureBox19", "Cookie Street" }, { "pictureBox20", "Vine Road" }, { "pictureBox21", "Free Parking" }, { "pictureBox22", "Clay Street" }, { "pictureBox23", "Chance" }, { "pictureBox24", "Shrub Street" }, { "pictureBox25", "Stick Avenue" }, { "pictureBox26", "Plains Station" }, { "pictureBox27", "Gold Square" }, { "pictureBox28", "Sand Street" }, { "pictureBox29", "Qater Pipe" }, { "pictureBox30", "Glass Tower" }, { "pictureBox31", "Go To Jail" }, { "pictureBox32", "Grass Road" }, { "pictureBox33", "Sunflower Street" }, { "pictureBox34", "Ender Chest" }, { "pictureBox35", "Rose Road" }, { "pictureBox36", "Mesa Station" }, { "pictureBox37", "Chance" }, { "pictureBox38", "Beacon Tower" }, { "pictureBox39", "Dragon Tax" }, { "pictureBox40", "Diamond City" } };
-
+        Dictionary<int, int> playermOney = new Dictionary<int, int>() { { 1, 1500 }, { 2, 1500 }, { 3, 1500 }, { 4, 1500 } };
         public Form1()
         {
             InitializeComponent();
@@ -101,11 +101,12 @@ namespace Monopoly2
             {
 
                 stevePos += move;
-                label9.Text = boxNames[boxes[stevePos]];
+                
                 if (stevePos >= 40)
                 {
                     stevePos -= 40;
                 }
+                label9.Text = boxNames[boxes[stevePos]];
                 if (stevePos == 0)
                 {
                     playerSteve.Top = pictureBox1.Top + 5;
@@ -312,11 +313,12 @@ namespace Monopoly2
             {
 
                 alexPos += move;
-                label10.Text = boxNames[boxes[alexPos]];
+                
                 if (alexPos >= 40)
                 {
                     alexPos -= 40;
                 }
+                label10.Text = boxNames[boxes[alexPos]];
                 if (alexPos == 0)
                 {
                     playerAlex.Top = pictureBox1.Top + 5;
@@ -523,11 +525,12 @@ namespace Monopoly2
             {
 
                 witherPos += move;
-                label11.Text = boxNames[boxes[witherPos]];
+                
                 if (witherPos >= 40)
                 {
                     witherPos -= 40;
                 }
+                label11.Text = boxNames[boxes[witherPos]];
                 if (witherPos == 0)
                 {
                     playerWither.Top = pictureBox1.Top + 45;
@@ -733,11 +736,12 @@ namespace Monopoly2
             if (currentPlayer == 4)
             {
                 edPos += move;
-                label12.Text = boxNames[boxes[edPos]];
                 if (edPos >= 40)
                 {
                     edPos -= 40;
                 }
+                label12.Text = boxNames[boxes[edPos]];
+
                 if (edPos == 0)
                 {
                     playerED.Top = pictureBox1.Top + 45;
