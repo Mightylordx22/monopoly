@@ -1039,7 +1039,7 @@ namespace Monopoly2
             if (currentPlayer == 4)
             {
                 int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1));
-                string currentSquare = boxNames[boxes[witherPos]];
+                string currentSquare = boxNames[boxes[edPos]];
                 if (ownedPlaces.ContainsKey(currentSquare) && (edMoney > pricePlaces[currentSquare]) && (ownedPlaces[currentSquare] == 0))
                 {
                     ownedPlaces[currentSquare] = currentPlayer;
