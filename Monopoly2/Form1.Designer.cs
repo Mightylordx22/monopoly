@@ -767,9 +767,9 @@
             this.currentPlayerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currentPlayerBox.Location = new System.Drawing.Point(1038, 783);
             this.currentPlayerBox.Name = "currentPlayerBox";
-            this.currentPlayerBox.Size = new System.Drawing.Size(276, 33);
+            this.currentPlayerBox.Size = new System.Drawing.Size(190, 33);
             this.currentPlayerBox.TabIndex = 61;
-            this.currentPlayerBox.Text = "playerSteve\'s Turn";
+            this.currentPlayerBox.Text = "Steve\'s Turn";
             this.currentPlayerBox.Click += new System.EventHandler(this.player_Click);
             // 
             // label9
@@ -841,7 +841,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1529, 877);
+            this.ClientSize = new System.Drawing.Size(1682, 965);
             this.Controls.Add(this.boughtLabel);
             this.Controls.Add(this.finishTurn);
             this.Controls.Add(this.buyButton);

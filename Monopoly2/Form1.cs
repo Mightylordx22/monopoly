@@ -7,7 +7,7 @@ namespace Monopoly2
 {
     public partial class Form1 : Form
     {
-        Dictionary<int, string> players = new Dictionary<int, string>() { { 1, "playerSteve" }, { 2, "playerAlex" }, { 3, "playerWither" }, { 4, "playerED" } };
+        Dictionary<int, string> players = new Dictionary<int, string>() { { 1, "Steve" }, { 2, "Alex" }, { 3, "Wither" }, { 4, "Ender Dragon" } };
         int currentPlayer = 1;
         int stevePos = 0;
         int alexPos = 0;
@@ -15,7 +15,6 @@ namespace Monopoly2
         int edPos = 0;
         string[] boxes = { "pictureBox1", "pictureBox2", "pictureBox3", "pictureBox4", "pictureBox5", "pictureBox6", "pictureBox7", "pictureBox8", "pictureBox9", "pictureBox10", "pictureBox11", "pictureBox12", "pictureBox13", "pictureBox14", "pictureBox15", "pictureBox16", "pictureBox17", "pictureBox18", "pictureBox19", "pictureBox20", "pictureBox21", "pictureBox22", "pictureBox23", "pictureBox24", "pictureBox25", "pictureBox26", "pictureBox27", "pictureBox28", "pictureBox29", "pictureBox30", "pictureBox31", "pictureBox32", "pictureBox33", "pictureBox34", "pictureBox35", "pictureBox36", "pictureBox37", "pictureBox38", "pictureBox39", "pictureBox40" };
         Dictionary<string, string> boxNames = new Dictionary<string, string> { { "pictureBox1", "Go" }, { "pictureBox2", "Dirt Road" }, { "pictureBox3", "Ender Chest" }, { "pictureBox4", "Church Road" }, { "pictureBox5", "Golem Tax" }, { "pictureBox6", "Mesa Station" }, { "pictureBox7", "Quartz Path" }, { "pictureBox8", "Chance" }, { "pictureBox9", "Quartz Temple" }, { "pictureBox10", "Quartz Statue" }, { "pictureBox11", "Jail" }, { "pictureBox12", "Nether Arc" }, { "pictureBox13", "Redsdtone Tower" }, { "pictureBox14", "Nether Mall" }, { "pictureBox15", "Nether Avenue" }, { "pictureBox16", "Jungle Station" }, { "pictureBox17", "Bean Street" }, { "pictureBox18", "Ender Chest" }, { "pictureBox19", "Cookie Street" }, { "pictureBox20", "Vine Road" }, { "pictureBox21", "Free Parking" }, { "pictureBox22", "Clay Street" }, { "pictureBox23", "Chance" }, { "pictureBox24", "Shrub Street" }, { "pictureBox25", "Stick Avenue" }, { "pictureBox26", "Plains Station" }, { "pictureBox27", "Gold Square" }, { "pictureBox28", "Sand Street" }, { "pictureBox29", "Water Pipe" }, { "pictureBox30", "Glass Tower" }, { "pictureBox31", "Go To Jail" }, { "pictureBox32", "Grass Road" }, { "pictureBox33", "Sunflower Street" }, { "pictureBox34", "Ender Chest" }, { "pictureBox35", "Rose Road" }, { "pictureBox36", "Swamp Station" }, { "pictureBox37", "Chance" }, { "pictureBox38", "Beacon Tower" }, { "pictureBox39", "Dragon Tax" }, { "pictureBox40", "Diamond City" } };
-        Dictionary<int, int> playermOney = new Dictionary<int, int>() { { 1, 1500 }, { 2, 1500 }, { 3, 1500 }, { 4, 1500 } };
         Dictionary<string, int> ownedPlaces = new Dictionary<string, int>() { { "Dirt Road", 0 }, { "Church Road", 0 }, { "Mesa Station", 0 }, { "Quartz Path", 0 }, { "Quartz Temple", 0 }, { "Quartz Statue", 0 }, { "Nether Arc", 0 }, { "Redsdtone Tower", 0 }, { "Nether Mall", 0 }, { "Nether Avenue", 0 }, { "Jungle Station", 0 }, { "Bean Street", 0 }, { "Cookie Street", 0 }, { "Vine Road", 0 }, { "Clay Street", 0 }, { "Shrub Street", 0 }, { "Stick Avenue", 0 }, { "Plains Station", 0 }, { "Gold Square", 0 }, { "Sand Street", 0 }, { "Water Pipe", 0 }, { "Glass Tower", 0 }, { "Grass Road", 0 } , { "Sunflower Street", 0 }, { "Rose Road", 0 }, { "Swamp Station", 0 },  { "Beacon Tower", 0 }, { "Diamond City", 0 } };
         Dictionary<string,int> pricePlaces = new Dictionary<string, int>() { { "Dirt Road", 60 }, { "Church Road", 60 }, { "Mesa Station", 200 }, { "Quartz Path", 100 }, { "Quartz Temple", 100 }, { "Quartz Statue", 120 }, { "Nether Arc", 140 }, { "Redsdtone Tower", 150 }, { "Nether Mall", 140 }, { "Nether Avenue", 160 }, { "Jungle Station", 200 }, { "Bean Street", 180 }, { "Cookie Street", 180 }, { "Vine Road", 200 }, { "Clay Street", 220 }, { "Shrub Street", 220 }, { "Stick Avenue", 240 }, { "Plains Station", 200 }, { "Gold Square", 260 }, { "Sand Street", 260 }, { "Water Pipe", 150 }, { "Glass Tower", 280 }, { "Grass Road", 300 }, { "Sunflower Street", 300 }, { "Rose Road", 320 }, { "Swamp Station", 200 }, { "Beacon Tower", 350 }, { "Diamond City", 400 } };
         public Form1()
@@ -25,7 +24,8 @@ namespace Monopoly2
             label10.Text = boxNames[boxes[alexPos]];
             label11.Text = boxNames[boxes[witherPos]];
             label12.Text = boxNames[boxes[edPos]];
-            
+            buyButton.Enabled = false;
+            finishTurn.Enabled = false;
         }
 
         private int throwDice()
@@ -102,7 +102,8 @@ namespace Monopoly2
 
             if (currentPlayer == 1)
             {
-
+                buyButton.Enabled = true;
+                finishTurn.Enabled = true;
                 stevePos += move;
                 int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1,steveMoneyLabel.Text.Length-1));
                 if (stevePos >= 40)
@@ -312,12 +313,22 @@ namespace Monopoly2
                     playerSteve.Top = pictureBox40.Top + 5;
                     playerSteve.Left = pictureBox40.Left + 5;
                 }
-                steveMoneyLabel.Text = "$"+steveMoney.ToString();
+
+
+                if (ownedPlaces.ContainsKey(boxNames[boxes[stevePos]]) && ownedPlaces[boxNames[boxes[stevePos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[stevePos]]))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + boxNames[boxes[stevePos]];
+                }
+
+                    steveMoneyLabel.Text = "$"+steveMoney.ToString();
                 randomButton.Enabled = false;
+
             }
             if (currentPlayer == 2)
             {
-
+                buyButton.Enabled = true;
+                finishTurn.Enabled = true;
                 alexPos += move;
                 int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1));
 
@@ -528,12 +539,19 @@ namespace Monopoly2
                     playerAlex.Top = pictureBox40.Top + 5;
                     playerAlex.Left = pictureBox40.Right - 35;
                 }
+
+                if (ownedPlaces.ContainsKey(boxNames[boxes[alexPos]]) && ownedPlaces[boxNames[boxes[alexPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[alexPos]]))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + boxNames[boxes[alexPos]];
+                }
                 alexMoneyLabel.Text = "$"+alexMoney.ToString();
                 randomButton.Enabled = false;
             }
             if (currentPlayer == 3)
             {
-
+                buyButton.Enabled = true;
+                finishTurn.Enabled = true;
                 witherPos += move;
                 int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1));
 
@@ -744,11 +762,19 @@ namespace Monopoly2
                     playerWither.Top = pictureBox40.Top + 45;
                     playerWither.Left = pictureBox40.Left + 5;
                 }
+
+                if (ownedPlaces.ContainsKey(boxNames[boxes[witherPos]]) && ownedPlaces[boxNames[boxes[witherPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[witherPos]]))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + boxNames[boxes[witherPos]];
+                }
                 witherMoneyLabel.Text = "$"+witherMoney.ToString();
                 randomButton.Enabled = false;
             }
             if (currentPlayer == 4)
             {
+                buyButton.Enabled = true;
+                finishTurn.Enabled = true;
                 edPos += move;
                 int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1));
 
@@ -960,6 +986,12 @@ namespace Monopoly2
                     playerED.Top = pictureBox40.Top + 45;
                     playerED.Left = pictureBox40.Right - 35;
                 }
+
+                if (ownedPlaces.ContainsKey(boxNames[boxes[edPos]]) && ownedPlaces[boxNames[boxes[edPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[edPos]]))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + boxNames[boxes[edPos]];
+                }
                 edMoneyLabel.Text = "$"+edMoney.ToString();
                 randomButton.Enabled = false;
             }
@@ -1068,7 +1100,8 @@ namespace Monopoly2
             }
             currentPlayerBox.Text = players[currentPlayer] + "'s turn";
             randomButton.Enabled = true;
-            buyButton.Enabled = true;
+            buyButton.Enabled = false;
+            finishTurn.Enabled = false;
             boughtLabel.Text = "";
         }
     }
