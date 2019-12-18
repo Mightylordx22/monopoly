@@ -648,36 +648,32 @@
             this.steveMoneyLabel.AutoSize = true;
             this.steveMoneyLabel.Location = new System.Drawing.Point(995, 234);
             this.steveMoneyLabel.Name = "steveMoneyLabel";
-            this.steveMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.steveMoneyLabel.Size = new System.Drawing.Size(0, 13);
             this.steveMoneyLabel.TabIndex = 49;
-            this.steveMoneyLabel.Text = "$1500";
             // 
             // alexMoneyLabel
             // 
             this.alexMoneyLabel.AutoSize = true;
             this.alexMoneyLabel.Location = new System.Drawing.Point(1143, 234);
             this.alexMoneyLabel.Name = "alexMoneyLabel";
-            this.alexMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.alexMoneyLabel.Size = new System.Drawing.Size(0, 13);
             this.alexMoneyLabel.TabIndex = 50;
-            this.alexMoneyLabel.Text = "$1500";
             // 
             // witherMoneyLabel
             // 
             this.witherMoneyLabel.AutoSize = true;
             this.witherMoneyLabel.Location = new System.Drawing.Point(1294, 234);
             this.witherMoneyLabel.Name = "witherMoneyLabel";
-            this.witherMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.witherMoneyLabel.Size = new System.Drawing.Size(0, 13);
             this.witherMoneyLabel.TabIndex = 51;
-            this.witherMoneyLabel.Text = "$1500";
             // 
             // edMoneyLabel
             // 
             this.edMoneyLabel.AutoSize = true;
             this.edMoneyLabel.Location = new System.Drawing.Point(1458, 234);
             this.edMoneyLabel.Name = "edMoneyLabel";
-            this.edMoneyLabel.Size = new System.Drawing.Size(37, 13);
+            this.edMoneyLabel.Size = new System.Drawing.Size(0, 13);
             this.edMoneyLabel.TabIndex = 52;
-            this.edMoneyLabel.Text = "$1500";
             // 
             // pictureBox46
             // 
