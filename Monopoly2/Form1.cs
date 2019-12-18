@@ -314,14 +314,20 @@ namespace Monopoly2
                     playerSteve.Left = pictureBox40.Left + 5;
                 }
 
-
-                if (ownedPlaces.ContainsKey(boxNames[boxes[stevePos]]) && ownedPlaces[boxNames[boxes[stevePos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[stevePos]]))
+                string currentBox = boxNames[boxes[stevePos]];
+                if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0)
                 {
                     buyButton.Enabled = false;
-                    boughtLabel.Text = "You can't buy " + boxNames[boxes[stevePos]];
+                    boughtLabel.Text = "You can't buy " + currentBox + " because " + players[ownedPlaces[currentBox]] + " owns it!";
+                    steveMoney -= (pricePlaces[currentBox] / 10) - 4;
+                    MessageBox.Show("You paid " + players[ownedPlaces[currentBox]] + " "+ ((pricePlaces[currentBox] / 10) - 4));
+
+                } else if (!ownedPlaces.ContainsKey(currentBox)) {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + currentBox;
                 }
 
-                    steveMoneyLabel.Text = "$"+steveMoney.ToString();
+                steveMoneyLabel.Text = "$"+steveMoney.ToString();
                 randomButton.Enabled = false;
 
             }
@@ -540,10 +546,19 @@ namespace Monopoly2
                     playerAlex.Left = pictureBox40.Right - 35;
                 }
 
-                if (ownedPlaces.ContainsKey(boxNames[boxes[alexPos]]) && ownedPlaces[boxNames[boxes[alexPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[alexPos]]))
+                string currentBox = boxNames[boxes[alexPos]];
+                if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0)
                 {
                     buyButton.Enabled = false;
-                    boughtLabel.Text = "You can't buy " + boxNames[boxes[alexPos]];
+                    boughtLabel.Text = "You can't buy " + currentBox + " because " + players[ownedPlaces[currentBox]] + " owns it!";
+                    alexMoney -= (pricePlaces[currentBox] / 10) - 4;
+                    MessageBox.Show("You paid " + players[ownedPlaces[currentBox]] + " " + ((pricePlaces[currentBox] / 10) - 4));
+
+                }
+                else if (!ownedPlaces.ContainsKey(currentBox))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + currentBox;
                 }
                 alexMoneyLabel.Text = "$"+alexMoney.ToString();
                 randomButton.Enabled = false;
@@ -763,10 +778,19 @@ namespace Monopoly2
                     playerWither.Left = pictureBox40.Left + 5;
                 }
 
-                if (ownedPlaces.ContainsKey(boxNames[boxes[witherPos]]) && ownedPlaces[boxNames[boxes[witherPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[witherPos]]))
+                string currentBox = boxNames[boxes[witherPos]];
+                if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0)
                 {
                     buyButton.Enabled = false;
-                    boughtLabel.Text = "You can't buy " + boxNames[boxes[witherPos]];
+                    boughtLabel.Text = "You can't buy " + currentBox + " because " + players[ownedPlaces[currentBox]] + " owns it!";
+                    witherMoney -= (pricePlaces[currentBox] / 10) - 4;
+                    MessageBox.Show("You paid " + players[ownedPlaces[currentBox]] + " " + ((pricePlaces[currentBox] / 10) - 4));
+
+                }
+                else if (!ownedPlaces.ContainsKey(currentBox))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + currentBox;
                 }
                 witherMoneyLabel.Text = "$"+witherMoney.ToString();
                 randomButton.Enabled = false;
@@ -987,10 +1011,19 @@ namespace Monopoly2
                     playerED.Left = pictureBox40.Right - 35;
                 }
 
-                if (ownedPlaces.ContainsKey(boxNames[boxes[edPos]]) && ownedPlaces[boxNames[boxes[edPos]]] != 0 || !ownedPlaces.ContainsKey(boxNames[boxes[edPos]]))
+                string currentBox = boxNames[boxes[edPos]];
+                if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0)
                 {
                     buyButton.Enabled = false;
-                    boughtLabel.Text = "You can't buy " + boxNames[boxes[edPos]];
+                    boughtLabel.Text = "You can't buy " + currentBox + " because " + players[ownedPlaces[currentBox]] + " owns it!";
+                    edMoney -= (pricePlaces[currentBox] / 10) - 4;
+                    MessageBox.Show("You paid " + players[ownedPlaces[currentBox]] + " " + ((pricePlaces[currentBox] / 10) - 4));
+
+                }
+                else if (!ownedPlaces.ContainsKey(currentBox))
+                {
+                    buyButton.Enabled = false;
+                    boughtLabel.Text = "You can't buy " + currentBox;
                 }
                 edMoneyLabel.Text = "$"+edMoney.ToString();
                 randomButton.Enabled = false;
@@ -1104,5 +1137,6 @@ namespace Monopoly2
             finishTurn.Enabled = false;
             boughtLabel.Text = "";
         }
+        
     }
 }
