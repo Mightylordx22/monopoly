@@ -18,6 +18,8 @@ namespace Monopoly2 {
         Dictionary<string, string> boxNames = new Dictionary<string, string> { { "pictureBox1", "Go" }, { "pictureBox2", "Dirt Road" }, { "pictureBox3", "Ender Chest" }, { "pictureBox4", "Church Road" }, { "pictureBox5", "Golem Tax" }, { "pictureBox6", "Mesa Station" }, { "pictureBox7", "Quartz Path" }, { "pictureBox8", "Chance" }, { "pictureBox9", "Quartz Temple" }, { "pictureBox10", "Quartz Statue" }, { "pictureBox11", "Jail" }, { "pictureBox12", "Nether Arc" }, { "pictureBox13", "Redsdtone Tower" }, { "pictureBox14", "Nether Mall" }, { "pictureBox15", "Nether Avenue" }, { "pictureBox16", "Jungle Station" }, { "pictureBox17", "Bean Street" }, { "pictureBox18", "Ender Chest" }, { "pictureBox19", "Cookie Street" }, { "pictureBox20", "Vine Road" }, { "pictureBox21", "Free Parking" }, { "pictureBox22", "Clay Street" }, { "pictureBox23", "Chance" }, { "pictureBox24", "Shrub Street" }, { "pictureBox25", "Stick Avenue" }, { "pictureBox26", "Plains Station" }, { "pictureBox27", "Gold Square" }, { "pictureBox28", "Sand Street" }, { "pictureBox29", "Water Pipe" }, { "pictureBox30", "Glass Tower" }, { "pictureBox31", "Go To Jail" }, { "pictureBox32", "Grass Road" }, { "pictureBox33", "Sunflower Street" }, { "pictureBox34", "Ender Chest" }, { "pictureBox35", "Rose Road" }, { "pictureBox36", "Swamp Station" }, { "pictureBox37", "Chance" }, { "pictureBox38", "Beacon Tower" }, { "pictureBox39", "Dragon Tax" }, { "pictureBox40", "Diamond City" } };
         Dictionary<string, int> ownedPlaces = new Dictionary<string, int>() { { "Dirt Road", 0 }, { "Church Road", 0 }, { "Mesa Station", 0 }, { "Quartz Path", 0 }, { "Quartz Temple", 0 }, { "Quartz Statue", 0 }, { "Nether Arc", 0 }, { "Redsdtone Tower", 0 }, { "Nether Mall", 0 }, { "Nether Avenue", 0 }, { "Jungle Station", 0 }, { "Bean Street", 0 }, { "Cookie Street", 0 }, { "Vine Road", 0 }, { "Clay Street", 0 }, { "Shrub Street", 0 }, { "Stick Avenue", 0 }, { "Plains Station", 0 }, { "Gold Square", 0 }, { "Sand Street", 0 }, { "Water Pipe", 0 }, { "Glass Tower", 0 }, { "Grass Road", 0 }, { "Sunflower Street", 0 }, { "Rose Road", 0 }, { "Swamp Station", 0 }, { "Beacon Tower", 0 }, { "Diamond City", 0 } };
         Dictionary<string, int> pricePlaces = new Dictionary<string, int>() { { "Dirt Road", 60 }, { "Church Road", 60 }, { "Mesa Station", 200 }, { "Quartz Path", 100 }, { "Quartz Temple", 100 }, { "Quartz Statue", 120 }, { "Nether Arc", 140 }, { "Redsdtone Tower", 150 }, { "Nether Mall", 140 }, { "Nether Avenue", 160 }, { "Jungle Station", 200 }, { "Bean Street", 180 }, { "Cookie Street", 180 }, { "Vine Road", 200 }, { "Clay Street", 220 }, { "Shrub Street", 220 }, { "Stick Avenue", 240 }, { "Plains Station", 200 }, { "Gold Square", 260 }, { "Sand Street", 260 }, { "Water Pipe", 150 }, { "Glass Tower", 280 }, { "Grass Road", 300 }, { "Sunflower Street", 300 }, { "Rose Road", 320 }, { "Swamp Station", 200 }, { "Beacon Tower", 350 }, { "Diamond City", 400 } };
+        Dictionary<int, string> chanceCards = new Dictionary<int, string>() { { 1, "Advance to Go!" }, { 2, "Herobring pays you $50" }, { 3, "Your dirt house gets upgraded for free - Collect $150" }, { 4, "Pay resource tax of $15" }, { 5, "Go to jail" }, { 6, "Advance to Diamond City" }, { 7, "You won a skin competition collect $10" }, { 8, "A creeper blows up your stuff lose all but $1" } };
+        Dictionary<int, string> comCards = new Dictionary<int, string>() { { 1, "Advance to Go!" }, { 2, "Pay Herobrine $100" }, { 3, "Resource tax refund collect $20" }, { 4, "Forest tax pay $50" }, { 5, "You find diamonds collect $150" }, { 6, "Your cow gets sold collect $50" }, { 7, "You won the Building Competition collect $25" }, { 8, "Advance to Beacon Tower" } };
         public Form1() {
             InitializeComponent();
             label9.Text = boxNames[boxes[stevePos]];
@@ -60,7 +62,7 @@ namespace Monopoly2 {
                     break;
                 case 6:
                     diceOne.Image = Image.FromFile("dice/six.png");
-                    diceTwo.Tag = "six";
+                    diceOne.Tag = "six";
                     break;
             }
             switch (two) {
@@ -107,8 +109,7 @@ namespace Monopoly2 {
         private void randomButton_Click(object sender, EventArgs e) {
             if (endGame == 3) {
                 MessageBox.Show("The game has now ended!");
-            }
-            else {
+            } else {
                 if (currentPlayer == 1 && playersInGame[currentPlayer] is true) {
                     int move;
                     bool skipTurn = false;
@@ -118,16 +119,14 @@ namespace Monopoly2 {
                             inJail[currentPlayer] = false;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Yay you rolled a 6!\nYou are out of jail now");
-                        }
-                        else {
+                        } else {
                             skipTurn = true;
                             randomButton.Enabled = false;
                             finishTurn.Enabled = true;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Sorry you didn't roll a 6 this round!");
                         }
-                    }
-                    else {
+                    } else {
                         move = throwDice();
                         numberBox.Text = move.ToString();
                     }
@@ -153,6 +152,31 @@ namespace Monopoly2 {
                         if (stevePos == 2) {
                             playerSteve.Top = pictureBox3.Top + 5;
                             playerSteve.Left = pictureBox3.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney -= 100;
+                            } else if (cCard == 3) {
+                                steveMoney += 20;
+                            } else if (cCard == 4) {
+                                steveMoney -= 50;
+                            } else if (cCard == 5) {
+                                steveMoney += 150;
+                            } else if (cCard == 6) {
+                                steveMoney += 50;
+                            } else if (cCard == 7) {
+                                steveMoney += 25;
+                            } else if (cCard == 8) {
+                                playerSteve.Top = pictureBox38.Top + 5;
+                                playerSteve.Left = pictureBox38.Left + 5;
+                                stevePos = 37;
+                            }
                         }
                         if (stevePos == 3) {
                             playerSteve.Top = pictureBox4.Top + 5;
@@ -175,10 +199,39 @@ namespace Monopoly2 {
                         if (stevePos == 7) {
                             playerSteve.Top = pictureBox8.Top + 5;
                             playerSteve.Left = pictureBox8.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney += 50;
+                            } else if (cCard == 3) {
+                                steveMoney += 150;
+                            } else if (cCard == 4) {
+                                steveMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerSteve.Top = pictureBox11.Top + 5;
+                                playerSteve.Left = pictureBox11.Left + 5;
+                                stevePos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerSteve.Top = pictureBox40.Top + 5;
+                                playerSteve.Left = pictureBox40.Left + 5;
+                                stevePos = 39;
+                            } else if (cCard == 7) {
+                                steveMoney += 10;
+                            } else if (cCard == 8) {
+                                steveMoney = 1;
+                            }
                         }
                         if (stevePos == 8) {
                             playerSteve.Top = pictureBox9.Top + 5;
                             playerSteve.Left = pictureBox9.Left + 5;
+
                         }
                         if (stevePos == 9) {
                             playerSteve.Top = pictureBox10.Top + 5;
@@ -215,6 +268,31 @@ namespace Monopoly2 {
                         if (stevePos == 17) {
                             playerSteve.Top = pictureBox18.Top + 5;
                             playerSteve.Left = pictureBox18.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney -= 100;
+                            } else if (cCard == 3) {
+                                steveMoney += 20;
+                            } else if (cCard == 4) {
+                                steveMoney -= 50;
+                            } else if (cCard == 5) {
+                                steveMoney += 150;
+                            } else if (cCard == 6) {
+                                steveMoney += 50;
+                            } else if (cCard == 7) {
+                                steveMoney += 25;
+                            } else if (cCard == 8) {
+                                playerSteve.Top = pictureBox38.Top + 5;
+                                playerSteve.Left = pictureBox38.Left + 5;
+                                stevePos = 37;
+                            }
                         }
                         if (stevePos == 18) {
                             playerSteve.Top = pictureBox19.Top + 5;
@@ -235,6 +313,34 @@ namespace Monopoly2 {
                         if (stevePos == 22) {
                             playerSteve.Top = pictureBox23.Top + 5;
                             playerSteve.Left = pictureBox23.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney += 50;
+                            } else if (cCard == 3) {
+                                steveMoney += 150;
+                            } else if (cCard == 4) {
+                                steveMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerSteve.Top = pictureBox11.Top + 5;
+                                playerSteve.Left = pictureBox11.Left + 5;
+                                stevePos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerSteve.Top = pictureBox40.Top + 5;
+                                playerSteve.Left = pictureBox40.Left + 5;
+                                stevePos = 39;
+                            } else if (cCard == 7) {
+                                steveMoney += 10;
+                            } else if (cCard == 8) {
+                                steveMoney = 1;
+                            }
                         }
                         if (stevePos == 23) {
                             playerSteve.Top = pictureBox24.Top + 5;
@@ -288,6 +394,31 @@ namespace Monopoly2 {
                         if (stevePos == 34) {
                             playerSteve.Top = pictureBox35.Top + 5;
                             playerSteve.Left = pictureBox35.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney -= 100;
+                            } else if (cCard == 3) {
+                                steveMoney += 20;
+                            } else if (cCard == 4) {
+                                steveMoney -= 50;
+                            } else if (cCard == 5) {
+                                steveMoney += 150;
+                            } else if (cCard == 6) {
+                                steveMoney += 50;
+                            } else if (cCard == 7) {
+                                steveMoney += 25;
+                            } else if (cCard == 8) {
+                                playerSteve.Top = pictureBox38.Top + 5;
+                                playerSteve.Left = pictureBox38.Left + 5;
+                                stevePos = 37;
+                            }
                         }
                         if (stevePos == 35) {
                             playerSteve.Top = pictureBox36.Top + 5;
@@ -296,6 +427,34 @@ namespace Monopoly2 {
                         if (stevePos == 36) {
                             playerSteve.Top = pictureBox37.Top + 5;
                             playerSteve.Left = pictureBox37.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerSteve.Top = pictureBox1.Top + 5;
+                                playerSteve.Left = pictureBox1.Left + 5;
+                                stevePos = 0;
+                                steveMoney += 200;
+                            } else if (cCard == 2) {
+                                steveMoney += 50;
+                            } else if (cCard == 3) {
+                                steveMoney += 150;
+                            } else if (cCard == 4) {
+                                steveMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerSteve.Top = pictureBox11.Top + 5;
+                                playerSteve.Left = pictureBox11.Left + 5;
+                                stevePos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerSteve.Top = pictureBox40.Top + 5;
+                                playerSteve.Left = pictureBox40.Left + 5;
+                                stevePos = 39;
+                            } else if (cCard == 7) {
+                                steveMoney += 10;
+                            } else if (cCard == 8) {
+                                steveMoney = 1;
+                            }
                         }
                         if (stevePos == 37) {
                             playerSteve.Top = pictureBox38.Top + 5;
@@ -315,32 +474,30 @@ namespace Monopoly2 {
                         if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] == 1) {
                             boughtLabel.Text = "You already own this!";
                             buyButton.Enabled = false;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
                             buyButton.Enabled = false;
                             int playerNumber = ownedPlaces[currentBox];
                             boughtLabel.Text = "You can't buy " + currentBox + " because " + players[playerNumber] + " owns it!";
-                            steveMoney -= (pricePlaces[currentBox] / 10) - 4;
-                            if (playerNumber == 2 && playersInGame[2] == true) {
-                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                            steveMoney -= (pricePlaces[currentBox] / 25) - 4;
+                            if (playerNumber == 2 && playersInGame[2] == true && inJail[2] == false) {
+                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 alexMoneyLabel.Text = "$" + alexMoney.ToString();
-                            }
-                            if (playerNumber == 3 && playersInGame[3] == true) {
-                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 3 && playersInGame[3] == true && inJail[3] == false) {
+                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 witherMoneyLabel.Text = "$" + witherMoney.ToString();
-                            }
-                            if (playerNumber == 4 && playersInGame[4] == true) {
-                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 4 && playersInGame[4] == true && inJail[4] == false) {
+                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 edMoneyLabel.Text = "$" + edMoney.ToString();
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else {
+                                MessageBox.Show("Not paying rent as the player who owns this is in jail!");
                             }
-                            MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 10) - 4));
-
-                        }
-                        else if (!ownedPlaces.ContainsKey(currentBox)) {
+                        } else if (!ownedPlaces.ContainsKey(currentBox)) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You can't buy " + currentBox;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && steveMoney < pricePlaces[currentBox]) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && steveMoney < pricePlaces[currentBox]) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You don't have enough money for this tile!";
                         }
@@ -353,8 +510,7 @@ namespace Monopoly2 {
                         randomButton.Enabled = false;
                     }
 
-                }
-                else if (currentPlayer == 2 && playersInGame[currentPlayer] is true) {
+                } else if (currentPlayer == 2 && playersInGame[currentPlayer] is true) {
                     int move;
                     bool skipTurn = false;
                     if (inJail[currentPlayer] == true) {
@@ -363,16 +519,14 @@ namespace Monopoly2 {
                             inJail[currentPlayer] = false;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Yay you rolled a 6!\nYou are out of jail now");
-                        }
-                        else {
+                        } else {
                             skipTurn = true;
                             randomButton.Enabled = false;
                             finishTurn.Enabled = true;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Sorry you didn't roll a 6 this round!");
                         }
-                    }
-                    else {
+                    } else {
                         move = throwDice();
                         numberBox.Text = move.ToString();
                     }
@@ -398,6 +552,31 @@ namespace Monopoly2 {
                         if (alexPos == 2) {
                             playerAlex.Top = pictureBox3.Top + 5;
                             playerAlex.Left = pictureBox3.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney -= 100;
+                            } else if (cCard == 3) {
+                                alexMoney += 20;
+                            } else if (cCard == 4) {
+                                alexMoney -= 50;
+                            } else if (cCard == 5) {
+                                alexMoney += 150;
+                            } else if (cCard == 6) {
+                                alexMoney += 50;
+                            } else if (cCard == 7) {
+                                alexMoney += 25;
+                            } else if (cCard == 8) {
+                                playerAlex.Top = pictureBox38.Top + 5;
+                                playerAlex.Left = pictureBox38.Right - 35;
+                                alexPos = 37;
+                            }
                         }
                         if (alexPos == 3) {
                             playerAlex.Top = pictureBox4.Top + 5;
@@ -420,6 +599,34 @@ namespace Monopoly2 {
                         if (alexPos == 7) {
                             playerAlex.Top = pictureBox8.Top + 5;
                             playerAlex.Left = pictureBox8.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney += 50;
+                            } else if (cCard == 3) {
+                                alexMoney += 150;
+                            } else if (cCard == 4) {
+                                alexMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerAlex.Top = pictureBox11.Top + 5;
+                                playerAlex.Left = pictureBox11.Right - 35;
+                                alexPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerAlex.Top = pictureBox40.Top + 5;
+                                playerAlex.Left = pictureBox40.Right - 35;
+                                alexPos = 39;
+                            } else if (cCard == 7) {
+                                alexMoney += 10;
+                            } else if (cCard == 8) {
+                                alexMoney = 1;
+                            }
                         }
                         if (alexPos == 8) {
                             playerAlex.Top = pictureBox9.Top + 5;
@@ -460,6 +667,31 @@ namespace Monopoly2 {
                         if (alexPos == 17) {
                             playerAlex.Top = pictureBox18.Top + 5;
                             playerAlex.Left = pictureBox18.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney -= 100;
+                            } else if (cCard == 3) {
+                                alexMoney += 20;
+                            } else if (cCard == 4) {
+                                alexMoney -= 50;
+                            } else if (cCard == 5) {
+                                alexMoney += 150;
+                            } else if (cCard == 6) {
+                                alexMoney += 50;
+                            } else if (cCard == 7) {
+                                alexMoney += 25;
+                            } else if (cCard == 8) {
+                                playerAlex.Top = pictureBox38.Top + 5;
+                                playerAlex.Left = pictureBox38.Right - 35;
+                                alexPos = 37;
+                            }
                         }
                         if (alexPos == 18) {
                             playerAlex.Top = pictureBox19.Top + 5;
@@ -480,6 +712,34 @@ namespace Monopoly2 {
                         if (alexPos == 22) {
                             playerAlex.Top = pictureBox23.Top + 5;
                             playerAlex.Left = pictureBox23.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney += 50;
+                            } else if (cCard == 3) {
+                                alexMoney += 150;
+                            } else if (cCard == 4) {
+                                alexMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerAlex.Top = pictureBox11.Top + 5;
+                                playerAlex.Left = pictureBox11.Right - 35;
+                                alexPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerAlex.Top = pictureBox40.Top + 5;
+                                playerAlex.Left = pictureBox40.Right - 35;
+                                alexPos = 39;
+                            } else if (cCard == 7) {
+                                alexMoney += 10;
+                            } else if (cCard == 8) {
+                                alexMoney = 1;
+                            }
                         }
                         if (alexPos == 23) {
                             playerAlex.Top = pictureBox24.Top + 5;
@@ -529,6 +789,31 @@ namespace Monopoly2 {
                         if (alexPos == 33) {
                             playerAlex.Top = pictureBox34.Top + 5;
                             playerAlex.Left = pictureBox34.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney -= 100;
+                            } else if (cCard == 3) {
+                                alexMoney += 20;
+                            } else if (cCard == 4) {
+                                alexMoney -= 50;
+                            } else if (cCard == 5) {
+                                alexMoney += 150;
+                            } else if (cCard == 6) {
+                                alexMoney += 50;
+                            } else if (cCard == 7) {
+                                alexMoney += 25;
+                            } else if (cCard == 8) {
+                                playerAlex.Top = pictureBox38.Top + 5;
+                                playerAlex.Left = pictureBox38.Right - 35;
+                                alexPos = 37;
+                            }
                         }
                         if (alexPos == 34) {
                             playerAlex.Top = pictureBox35.Top + 5;
@@ -541,6 +826,34 @@ namespace Monopoly2 {
                         if (alexPos == 36) {
                             playerAlex.Top = pictureBox37.Top + 5;
                             playerAlex.Left = pictureBox37.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerAlex.Top = pictureBox1.Top + 5;
+                                playerAlex.Left = pictureBox1.Right - 35;
+                                alexPos = 0;
+                                alexMoney += 200;
+                            } else if (cCard == 2) {
+                                alexMoney += 50;
+                            } else if (cCard == 3) {
+                                alexMoney += 150;
+                            } else if (cCard == 4) {
+                                alexMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerAlex.Top = pictureBox11.Top + 5;
+                                playerAlex.Left = pictureBox11.Right - 35;
+                                alexPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerAlex.Top = pictureBox40.Top + 5;
+                                playerAlex.Left = pictureBox40.Right - 35;
+                                alexPos = 39;
+                            } else if (cCard == 7) {
+                                alexMoney += 10;
+                            } else if (cCard == 8) {
+                                alexMoney = 1;
+                            }
                         }
                         if (alexPos == 37) {
                             playerAlex.Top = pictureBox38.Top + 5;
@@ -560,32 +873,30 @@ namespace Monopoly2 {
                         if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] == 2) {
                             boughtLabel.Text = "You already own this!";
                             buyButton.Enabled = false;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
                             buyButton.Enabled = false;
                             int playerNumber = ownedPlaces[currentBox];
                             boughtLabel.Text = "You can't buy " + currentBox + " because " + players[playerNumber] + " owns it!";
-                            alexMoney -= (pricePlaces[currentBox] / 10) - 4;
-                            if (playerNumber == 1 && playersInGame[1] == true) {
-                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                            alexMoney -= (pricePlaces[currentBox] / 25) - 4;
+                            if (playerNumber == 1 && playersInGame[1] == true && inJail[1] == false) {
+                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 steveMoneyLabel.Text = "$" + steveMoney.ToString();
-                            }
-                            if (playerNumber == 3 && playersInGame[3] == true) {
-                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 3 && playersInGame[3] == true && inJail[3] == false) {
+                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 witherMoneyLabel.Text = "$" + witherMoney.ToString();
-                            }
-                            if (playerNumber == 4 && playersInGame[4] == true) {
-                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 4 && playersInGame[4] == true && inJail[4] == false) {
+                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 edMoneyLabel.Text = "$" + edMoney.ToString();
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else {
+                                MessageBox.Show("Not paying rent as the player who owns this is in jail!");
                             }
-                            MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 10) - 4));
-
-                        }
-                        else if (!ownedPlaces.ContainsKey(currentBox)) {
+                        } else if (!ownedPlaces.ContainsKey(currentBox)) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You can't buy " + currentBox;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && alexMoney < pricePlaces[currentBox]) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && alexMoney < pricePlaces[currentBox]) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You don't have enough money for this tile!";
                         }
@@ -598,8 +909,7 @@ namespace Monopoly2 {
                         randomButton.Enabled = false;
                     }
 
-                }
-                else if (currentPlayer == 3 && playersInGame[currentPlayer] is true) {
+                } else if (currentPlayer == 3 && playersInGame[currentPlayer] is true) {
                     int move;
                     bool skipTurn = false;
                     if (inJail[currentPlayer] == true) {
@@ -608,16 +918,14 @@ namespace Monopoly2 {
                             inJail[currentPlayer] = false;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Yay you rolled a 6!\nYou are out of jail now");
-                        }
-                        else {
+                        } else {
                             skipTurn = true;
                             randomButton.Enabled = false;
                             finishTurn.Enabled = true;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Sorry you didn't roll a 6 this round!");
                         }
-                    }
-                    else {
+                    } else {
                         move = throwDice();
                         numberBox.Text = move.ToString();
                     }
@@ -644,6 +952,31 @@ namespace Monopoly2 {
                         if (witherPos == 2) {
                             playerWither.Top = pictureBox3.Top + 45;
                             playerWither.Left = pictureBox3.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney -= 100;
+                            } else if (cCard == 3) {
+                                witherMoney += 20;
+                            } else if (cCard == 4) {
+                                witherMoney -= 50;
+                            } else if (cCard == 5) {
+                                witherMoney += 150;
+                            } else if (cCard == 6) {
+                                witherMoney += 50;
+                            } else if (cCard == 7) {
+                                witherMoney += 25;
+                            } else if (cCard == 8) {
+                                playerWither.Top = pictureBox38.Top + 45;
+                                playerWither.Left = pictureBox38.Left + 5;
+                                witherPos = 37;
+                            }
                         }
                         if (witherPos == 3) {
                             playerWither.Top = pictureBox4.Top + 45;
@@ -666,6 +999,34 @@ namespace Monopoly2 {
                         if (witherPos == 7) {
                             playerWither.Top = pictureBox8.Top + 45;
                             playerWither.Left = pictureBox8.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney += 50;
+                            } else if (cCard == 3) {
+                                witherMoney += 150;
+                            } else if (cCard == 4) {
+                                witherMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerWither.Top = pictureBox11.Top + 45;
+                                playerWither.Left = pictureBox11.Left + 5;
+                                witherPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerWither.Top = pictureBox40.Top + 45;
+                                playerWither.Left = pictureBox40.Left + 5;
+                                witherPos = 39;
+                            } else if (cCard == 7) {
+                                witherMoney += 10;
+                            } else if (cCard == 8) {
+                                witherMoney = 1;
+                            }
                         }
                         if (witherPos == 8) {
                             playerWither.Top = pictureBox9.Top + 45;
@@ -706,6 +1067,31 @@ namespace Monopoly2 {
                         if (witherPos == 17) {
                             playerWither.Top = pictureBox18.Top + 45;
                             playerWither.Left = pictureBox18.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney -= 100;
+                            } else if (cCard == 3) {
+                                witherMoney += 20;
+                            } else if (cCard == 4) {
+                                witherMoney -= 50;
+                            } else if (cCard == 5) {
+                                witherMoney += 150;
+                            } else if (cCard == 6) {
+                                witherMoney += 50;
+                            } else if (cCard == 7) {
+                                witherMoney += 25;
+                            } else if (cCard == 8) {
+                                playerWither.Top = pictureBox38.Top + 45;
+                                playerWither.Left = pictureBox38.Left + 5;
+                                witherPos = 37;
+                            }
                         }
                         if (witherPos == 18) {
                             playerWither.Top = pictureBox19.Top + 45;
@@ -726,6 +1112,34 @@ namespace Monopoly2 {
                         if (witherPos == 22) {
                             playerWither.Top = pictureBox23.Top + 45;
                             playerWither.Left = pictureBox23.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney += 50;
+                            } else if (cCard == 3) {
+                                witherMoney += 150;
+                            } else if (cCard == 4) {
+                                witherMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerWither.Top = pictureBox11.Top + 45;
+                                playerWither.Left = pictureBox11.Left + 5;
+                                witherPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerWither.Top = pictureBox40.Top + 45;
+                                playerWither.Left = pictureBox40.Left + 5;
+                                witherPos = 39;
+                            } else if (cCard == 7) {
+                                witherMoney += 10;
+                            } else if (cCard == 8) {
+                                witherMoney = 1;
+                            }
                         }
                         if (witherPos == 23) {
                             playerWither.Top = pictureBox24.Top + 45;
@@ -759,8 +1173,8 @@ namespace Monopoly2 {
                             playerWither.Top = pictureBox31.Top + 45;
                             playerWither.Left = pictureBox31.Left + 5;
                             MessageBox.Show("Ouch you're in jail now!");
-                            playerWither.Top = pictureBox12.Top + 45;
-                            playerWither.Left = pictureBox12.Left + 5;
+                            playerWither.Top = pictureBox11.Top + 45;
+                            playerWither.Left = pictureBox11.Left + 5;
                             witherPos -= 20;
                             inJail[currentPlayer] = true;
                         }
@@ -775,6 +1189,31 @@ namespace Monopoly2 {
                         if (witherPos == 33) {
                             playerWither.Top = pictureBox34.Top + 45;
                             playerWither.Left = pictureBox34.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney -= 100;
+                            } else if (cCard == 3) {
+                                witherMoney += 20;
+                            } else if (cCard == 4) {
+                                witherMoney -= 50;
+                            } else if (cCard == 5) {
+                                witherMoney += 150;
+                            } else if (cCard == 6) {
+                                witherMoney += 50;
+                            } else if (cCard == 7) {
+                                witherMoney += 25;
+                            } else if (cCard == 8) {
+                                playerWither.Top = pictureBox38.Top + 45;
+                                playerWither.Left = pictureBox38.Left + 5;
+                                witherPos = 37;
+                            }
                         }
                         if (witherPos == 34) {
                             playerWither.Top = pictureBox35.Top + 45;
@@ -787,6 +1226,34 @@ namespace Monopoly2 {
                         if (witherPos == 36) {
                             playerWither.Top = pictureBox37.Top + 45;
                             playerWither.Left = pictureBox37.Left + 5;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerWither.Top = pictureBox1.Top + 45;
+                                playerWither.Left = pictureBox1.Left + 5;
+                                witherPos = 0;
+                                witherMoney += 200;
+                            } else if (cCard == 2) {
+                                witherMoney += 50;
+                            } else if (cCard == 3) {
+                                witherMoney += 150;
+                            } else if (cCard == 4) {
+                                witherMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerWither.Top = pictureBox11.Top + 45;
+                                playerWither.Left = pictureBox11.Left + 5;
+                                witherPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerWither.Top = pictureBox40.Top + 45;
+                                playerWither.Left = pictureBox40.Left + 5;
+                                witherPos = 39;
+                            } else if (cCard == 7) {
+                                witherMoney += 10;
+                            } else if (cCard == 8) {
+                                witherMoney = 1;
+                            }
                         }
                         if (witherPos == 37) {
                             playerWither.Top = pictureBox38.Top + 45;
@@ -802,37 +1269,34 @@ namespace Monopoly2 {
                             playerWither.Top = pictureBox40.Top + 45;
                             playerWither.Left = pictureBox40.Left + 5;
                         }
-
                         string currentBox = boxNames[boxes[witherPos]];
                         if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] == 3) {
                             boughtLabel.Text = "You already own this!";
                             buyButton.Enabled = false;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
                             buyButton.Enabled = false;
                             int playerNumber = ownedPlaces[currentBox];
                             boughtLabel.Text = "You can't buy " + currentBox + " because " + players[playerNumber] + " owns it!";
-                            witherMoney -= (pricePlaces[currentBox] / 10) - 4;
-                            if (playerNumber == 1 && playersInGame[1] == true) {
-                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                            witherMoney -= (pricePlaces[currentBox] / 25) - 4;
+                            if (playerNumber == 1 && playersInGame[1] == true && inJail[1] == false) {
+                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 steveMoneyLabel.Text = "$" + steveMoney.ToString();
-                            }
-                            if (playerNumber == 2 && playersInGame[2] == true) {
-                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 2 && playersInGame[2] == true && inJail[2] == false) {
+                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 alexMoneyLabel.Text = "$" + alexMoney.ToString();
-                            }
-                            if (playerNumber == 4 && playersInGame[4] == true) {
-                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 4 && playersInGame[4] == true && inJail[4] == false) {
+                                int edMoney = Int32.Parse(edMoneyLabel.Text.Substring(1, edMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 edMoneyLabel.Text = "$" + edMoney.ToString();
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else {
+                                MessageBox.Show("Not paying rent as the player who owns this is in jail!");
                             }
-                            MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 10) - 4));
-
-                        }
-                        else if (!ownedPlaces.ContainsKey(currentBox)) {
+                        } else if (!ownedPlaces.ContainsKey(currentBox)) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You can't buy " + currentBox;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && witherMoney < pricePlaces[currentBox]) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && witherMoney < pricePlaces[currentBox]) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You don't have enough money for this tile!";
                         }
@@ -844,8 +1308,7 @@ namespace Monopoly2 {
                         witherMoneyLabel.Text = "$" + witherMoney.ToString();
                         randomButton.Enabled = false;
                     }
-                }
-                else if (currentPlayer == 4 && playersInGame[currentPlayer] is true) {
+                } else if (currentPlayer == 4 && playersInGame[currentPlayer] is true) {
                     int move;
                     bool skipTurn = false;
                     if (inJail[currentPlayer] == true) {
@@ -854,16 +1317,14 @@ namespace Monopoly2 {
                             inJail[currentPlayer] = false;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Yay you rolled a 6!\nYou are out of jail now");
-                        }
-                        else {
+                        } else {
                             skipTurn = true;
                             randomButton.Enabled = false;
                             finishTurn.Enabled = true;
                             numberBox.Text = move.ToString();
                             MessageBox.Show("Sorry you didn't roll a 6 this round!");
                         }
-                    }
-                    else {
+                    } else {
                         move = throwDice();
                         numberBox.Text = move.ToString();
                     }
@@ -891,6 +1352,31 @@ namespace Monopoly2 {
                         if (edPos == 2) {
                             playerED.Top = pictureBox3.Top + 45;
                             playerED.Left = pictureBox3.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney -= 100;
+                            } else if (cCard == 3) {
+                                edMoney += 20;
+                            } else if (cCard == 4) {
+                                edMoney -= 50;
+                            } else if (cCard == 5) {
+                                edMoney += 150;
+                            } else if (cCard == 6) {
+                                edMoney += 50;
+                            } else if (cCard == 7) {
+                                edMoney += 25;
+                            } else if (cCard == 8) {
+                                playerED.Top = pictureBox38.Top + 45;
+                                playerED.Left = pictureBox38.Right - 35;
+                                edPos = 37;
+                            }
                         }
                         if (edPos == 3) {
                             playerED.Top = pictureBox4.Top + 45;
@@ -913,6 +1399,34 @@ namespace Monopoly2 {
                         if (edPos == 7) {
                             playerED.Top = pictureBox8.Top + 45;
                             playerED.Left = pictureBox8.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney += 50;
+                            } else if (cCard == 3) {
+                                edMoney += 150;
+                            } else if (cCard == 4) {
+                                edMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerED.Top = pictureBox11.Top + 45;
+                                playerED.Left = pictureBox11.Right - 35;
+                                edPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerED.Top = pictureBox40.Top + 45;
+                                playerED.Left = pictureBox40.Right - 35;
+                                edPos = 39;
+                            } else if (cCard == 7) {
+                                edMoney += 10;
+                            } else if (cCard == 8) {
+                                edMoney = 1;
+                            }
                         }
                         if (edPos == 8) {
                             playerED.Top = pictureBox9.Top + 45;
@@ -953,6 +1467,31 @@ namespace Monopoly2 {
                         if (edPos == 17) {
                             playerED.Top = pictureBox18.Top + 45;
                             playerED.Left = pictureBox18.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney -= 100;
+                            } else if (cCard == 3) {
+                                edMoney += 20;
+                            } else if (cCard == 4) {
+                                edMoney -= 50;
+                            } else if (cCard == 5) {
+                                edMoney += 150;
+                            } else if (cCard == 6) {
+                                edMoney += 50;
+                            } else if (cCard == 7) {
+                                edMoney += 25;
+                            } else if (cCard == 8) {
+                                playerED.Top = pictureBox38.Top + 45;
+                                playerED.Left = pictureBox38.Right - 35;
+                                edPos = 37;
+                            }
                         }
                         if (edPos == 18) {
                             playerED.Top = pictureBox19.Top + 45;
@@ -973,6 +1512,34 @@ namespace Monopoly2 {
                         if (edPos == 22) {
                             playerED.Top = pictureBox23.Top + 45;
                             playerED.Left = pictureBox23.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney += 50;
+                            } else if (cCard == 3) {
+                                edMoney += 150;
+                            } else if (cCard == 4) {
+                                edMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerED.Top = pictureBox11.Top + 45;
+                                playerED.Left = pictureBox11.Right - 35;
+                                edPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerED.Top = pictureBox40.Top + 45;
+                                playerED.Left = pictureBox40.Right - 35;
+                                edPos = 39;
+                            } else if (cCard == 7) {
+                                edMoney += 10;
+                            } else if (cCard == 8) {
+                                edMoney = 1;
+                            }
                         }
                         if (edPos == 23) {
                             playerED.Top = pictureBox24.Top + 45;
@@ -1022,6 +1589,31 @@ namespace Monopoly2 {
                         if (edPos == 33) {
                             playerED.Top = pictureBox34.Top + 45;
                             playerED.Left = pictureBox34.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(comCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney -= 100;
+                            } else if (cCard == 3) {
+                                edMoney += 20;
+                            } else if (cCard == 4) {
+                                edMoney -= 50;
+                            } else if (cCard == 5) {
+                                edMoney += 150;
+                            } else if (cCard == 6) {
+                                edMoney += 50;
+                            } else if (cCard == 7) {
+                                edMoney += 25;
+                            } else if (cCard == 8) {
+                                playerED.Top = pictureBox38.Top + 45;
+                                playerED.Left = pictureBox38.Right - 35;
+                                edPos = 37;
+                            }
                         }
                         if (edPos == 34) {
                             playerED.Top = pictureBox35.Top + 45;
@@ -1034,6 +1626,34 @@ namespace Monopoly2 {
                         if (edPos == 36) {
                             playerED.Top = pictureBox37.Top + 45;
                             playerED.Left = pictureBox37.Right - 35;
+                            Random rnd = new Random();
+                            int cCard = rnd.Next(1, 9);
+                            MessageBox.Show(chanceCards[cCard]);
+                            if (cCard == 1) {
+                                playerED.Top = pictureBox1.Top + 45;
+                                playerED.Left = pictureBox1.Right - 35;
+                                edPos = 0;
+                                edMoney += 200;
+                            } else if (cCard == 2) {
+                                edMoney += 50;
+                            } else if (cCard == 3) {
+                                edMoney += 150;
+                            } else if (cCard == 4) {
+                                edMoney -= 15;
+                            } else if (cCard == 5) {
+                                playerED.Top = pictureBox11.Top + 45;
+                                playerED.Left = pictureBox11.Right - 35;
+                                edPos = 10;
+                                inJail[currentPlayer] = true;
+                            } else if (cCard == 6) {
+                                playerED.Top = pictureBox40.Top + 45;
+                                playerED.Left = pictureBox40.Right - 35;
+                                edPos = 39;
+                            } else if (cCard == 7) {
+                                edMoney += 10;
+                            } else if (cCard == 8) {
+                                edMoney = 1;
+                            }
                         }
                         if (edPos == 37) {
                             playerED.Top = pictureBox38.Top + 45;
@@ -1054,31 +1674,31 @@ namespace Monopoly2 {
                         if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] == 4) {
                             boughtLabel.Text = "You already own this!";
                             buyButton.Enabled = false;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && ownedPlaces[currentBox] != 0) {
                             buyButton.Enabled = false;
                             int playerNumber = ownedPlaces[currentBox];
                             boughtLabel.Text = "You can't buy " + currentBox + " because " + players[playerNumber] + " owns it!";
-                            edMoney -= (pricePlaces[currentBox] / 10) - 4;
-                            if (playerNumber == 1 && playersInGame[1] == true) {
-                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                            edMoney -= (pricePlaces[currentBox] / 25) - 4;
+                            if (playerNumber == 1 && playersInGame[1] == true && inJail[1] == false) {
+                                int steveMoney = Int32.Parse(steveMoneyLabel.Text.Substring(1, steveMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 steveMoneyLabel.Text = "$" + steveMoney.ToString();
-                            }
-                            if (playerNumber == 3 && playersInGame[3] == true) {
-                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 3 && playersInGame[3] == true && inJail[3] == false) {
+                                int witherMoney = Int32.Parse(witherMoneyLabel.Text.Substring(1, witherMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 witherMoneyLabel.Text = "$" + witherMoney.ToString();
-                            }
-                            if (playerNumber == 2 && playersInGame[2] == true) {
-                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 10) - 4;
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else if (playerNumber == 2 && playersInGame[2] == true && inJail[2] == false) {
+                                int alexMoney = Int32.Parse(alexMoneyLabel.Text.Substring(1, alexMoneyLabel.Text.Length - 1)) + (pricePlaces[currentBox] / 25) - 4;
                                 alexMoneyLabel.Text = "$" + alexMoney.ToString();
+                                MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 25) - 4));
+                            } else {
+                                MessageBox.Show("Not paying rent as the player who owns this is in jail!");
                             }
-                            MessageBox.Show("You paid " + players[playerNumber] + " $" + ((pricePlaces[currentBox] / 10) - 4));
-                        }
-                        else if (!ownedPlaces.ContainsKey(currentBox)) {
+
+                        } else if (!ownedPlaces.ContainsKey(currentBox)) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You can't buy " + currentBox;
-                        }
-                        else if (ownedPlaces.ContainsKey(currentBox) && edMoney < pricePlaces[currentBox]) {
+                        } else if (ownedPlaces.ContainsKey(currentBox) && edMoney < pricePlaces[currentBox]) {
                             buyButton.Enabled = false;
                             boughtLabel.Text = "You don't have enough money for this tile!";
                         }
@@ -1090,8 +1710,7 @@ namespace Monopoly2 {
                         edMoneyLabel.Text = "$" + edMoney.ToString();
                         randomButton.Enabled = false;
                     }
-                }
-                else {
+                } else {
                     MessageBox.Show("Passing this turn");
                     currentPlayer++;
                     if (currentPlayer == 5) {
@@ -1120,11 +1739,9 @@ namespace Monopoly2 {
                     steveMoney -= pricePlaces[currentSquare];
                     steveMoneyLabel.Text = "$" + steveMoney.ToString();
                     buyButton.Enabled = false;
-                }
-                else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
+                } else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
                     MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
-                }
-                else {
+                } else {
                     MessageBox.Show("You can't buy " + currentSquare);
                 }
             }
@@ -1137,11 +1754,9 @@ namespace Monopoly2 {
                     alexMoney -= pricePlaces[currentSquare];
                     alexMoneyLabel.Text = "$" + alexMoney.ToString();
                     buyButton.Enabled = false;
-                }
-                else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
+                } else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
                     MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
-                }
-                else {
+                } else {
                     MessageBox.Show("You can't buy " + currentSquare);
                 }
             }
@@ -1154,11 +1769,9 @@ namespace Monopoly2 {
                     witherMoney -= pricePlaces[currentSquare];
                     witherMoneyLabel.Text = "$" + witherMoney.ToString();
                     buyButton.Enabled = false;
-                }
-                else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
+                } else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
                     MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
-                }
-                else {
+                } else {
                     MessageBox.Show("You can't buy " + currentSquare);
                 }
             }
@@ -1171,11 +1784,9 @@ namespace Monopoly2 {
                     edMoney -= pricePlaces[currentSquare];
                     edMoneyLabel.Text = "$" + edMoney.ToString();
                     buyButton.Enabled = false;
-                }
-                else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
+                } else if (ownedPlaces.ContainsKey(currentSquare) && ownedPlaces[currentSquare] != 0) {
                     MessageBox.Show("You can't buy " + currentSquare + " because " + players[ownedPlaces[currentSquare]] + " owns it!");
-                }
-                else {
+                } else {
                     MessageBox.Show("You can't buy " + currentSquare);
                 }
             }
